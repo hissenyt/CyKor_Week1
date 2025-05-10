@@ -95,8 +95,8 @@ int pop()
 
 //func 내부는 자유롭게 추가해도 괜찮으나, 아래의 구조를 바꾸지는 마세요
 void func1(int arg1, int arg2, int arg3)
-{
-    int var_1 = 100;
+{  
+      int var_1 = 100;
     
     // func1의 스택 프레임 형성 (함수 프롤로그 + push)
     push(arg3, "arg3");
@@ -105,7 +105,10 @@ void func1(int arg1, int arg2, int arg3)
     push(-1, "Return Address");
     push(FP, "func1 SFP");
     FP = SP;
-    push(var_1, "var_1");
+    //push(var_1, "var_1");
+    SP += 1;
+    call_stack[SP] = var_1;
+    strcpy(stack_info[SP], "var_1");
 
     print_stack();
     func2(11, 13);
@@ -130,7 +133,10 @@ void func2(int arg1, int arg2)
     push(-1, "Return Address");
     push(FP, "func2 SFP");
     FP = SP;
-    push(var_2, "var_2");
+    //push(var_2, "var_2");
+    SP += 1;
+    call_stack[SP] = var_2;
+    strcpy(stack_info[SP], "var_2");
 
     print_stack();
     func3(77);
@@ -154,8 +160,13 @@ void func3(int arg1)
     push(-1, "Return Address");
     push(FP, "func3 SFP");
     FP = SP;
-    push(var_3, "var_3");
-    push(var_4, "var_4");
+    // push(var_3, "var_3");
+    // push(var_4, "var_4");
+    SP += 2;
+    call_stack[SP - 1] = var_3;
+    strcpy(stack_info[SP - 1], "var_3");
+    call_stack[SP] = var_4;
+    strcpy(stack_info[SP], "var_4");
 
     print_stack();
 }
