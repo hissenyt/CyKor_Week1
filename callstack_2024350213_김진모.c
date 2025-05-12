@@ -21,6 +21,7 @@
     ========================================================================
 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #define STACK_SIZE 50 // 최대 스택 크기
 
@@ -107,6 +108,7 @@ void func1(int arg1, int arg2, int arg3)
     FP = SP;
     //push(var_1, "var_1");
     SP += 1;
+    if (SP >= STACK_SIZE) {printf("Segmentation Fault"); exit(0);}
     call_stack[SP] = var_1;
     strcpy(stack_info[SP], "var_1");
 
@@ -135,6 +137,7 @@ void func2(int arg1, int arg2)
     FP = SP;
     //push(var_2, "var_2");
     SP += 1;
+    if (SP >= STACK_SIZE) {printf("Segmentation Fault"); exit(0);}
     call_stack[SP] = var_2;
     strcpy(stack_info[SP], "var_2");
 
@@ -163,6 +166,7 @@ void func3(int arg1)
     // push(var_3, "var_3");
     // push(var_4, "var_4");
     SP += 2;
+    if (SP >= STACK_SIZE) {printf("Segmentation Fault"); exit(0);}    
     call_stack[SP - 1] = var_3;
     strcpy(stack_info[SP - 1], "var_3");
     call_stack[SP] = var_4;
